@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
 
-mongoose.connect('mongodb://localhost/mongoapp').then(function () {
+mongoose.connect('mongodb://localhost/hihi').then(function () {
   console.log('connected to mongo')
 })
 
@@ -15,7 +16,9 @@ var userSchema = mongoose.Schema({
   comments:{
     type:Array,
     default:[],
-  }
+  },
+  username: String,
+  
 })
 
 module.exports = mongoose.model('user', userSchema);

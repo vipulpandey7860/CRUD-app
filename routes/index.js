@@ -44,7 +44,7 @@ router.get('/update/:id', function (req, res) {
 });
 
 router.get('/delete/:id', function (req, res) {
-  userModel.findOneAndDelete({ _id: req.params.id })
+  userModel.findByIdAndDelete({ _id: req.params.id })
     .then(function (users) {
       res.redirect("/userdetails")
     })
@@ -52,7 +52,7 @@ router.get('/delete/:id', function (req, res) {
 
 
 router.get('/favourite/:id', function (req, res) {
-  userModel.findOneAndUpdate({ _id: req.params.id })
+  userModel.findByIdAndUpdate({ _id: req.params.id })
     .then(function (data) {
       data.favourite++;
       data.save()
@@ -64,11 +64,11 @@ router.get('/favourite/:id', function (req, res) {
 
 
 router.get('/comment/:id', function (req, res) {
-  userModel.findOneAndUpdate({ _id: req.params.id })
+  userModel.findByIdAndUpdate({ _id: req.params.id })
     .then(function (cmnt) {
       var date = new Date();
       cmnt.comments.push({comment:req.query.comment , date :`${date.getMonth()+1}/${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()} ` })
-      cmnt.save().then(function (data) {
+      cmnt.save().then(function () {
 
         res.redirect("/userdetails")
 
